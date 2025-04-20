@@ -32,17 +32,52 @@ npm install
 ### 3. 🧪 Start Ganache (Local Blockchain)
 
 - Launch Ganache.
+  Install Ganache (if not installed):
+  ```bash
+  npm install -g ganache
+  ```
+  Start Ganache on the command line:
+  ```bash
+  ganache
+  ```
+  This will launch a local Ethereum blockchain on http://127.0.0.1:8545 with 10 test accounts and private keys.
 - Copy the private key of the **first account**.
+  In the Ganache output, you’ll see 10 accounts with public addresses and private keys.
+  Copy the private key of the first account. Example:
+  ```vbnet
+  (0) 0x1234...abcd
+  Private Key: 0xabcdef1234...5678`
+  ```
 - You'll use this in MetaMask.
 
-### 4. 🔗 Connect MetaMask with Ganache
+### 4. 🦊 Connect MetaMask to Ganache (Local Network)
+This step allows your frontend React app to interact with the deployed contract using MetaMask.
 
-1. Open MetaMask → Add Network.
-2. Fill in:
-   - **Network Name**: Localhost 8545
-   - **New RPC URL**: http://127.0.0.1:8545
-   - **Chain ID**: 1337
-3. Import the Ganache private key into MetaMask.
+✅ Add Ganache Network to MetaMask
+Open MetaMask browser extension.
+
+Click on the Network Dropdown → Add Network.
+
+Choose “Add a network manually” and enter:
+
+Network Name: Ganache Local
+
+New RPC URL: http://127.0.0.1:8545
+
+Chain ID: 1337
+
+Currency Symbol: ETH
+
+Click Save.
+
+✅ Import Ganache Account into MetaMask
+In MetaMask, click on your account icon → Import Account.
+
+Paste the private key you copied from Ganache.
+
+Click Import.
+
+You’ll now see test ETH (usually 100 ETH) in your MetaMask wallet and connected to the Ganache Local Network.
 
 ### 5. 💼 Compile and Deploy Smart Contract
 
@@ -55,7 +90,7 @@ npx hardhat run scripts/deploy.js --network localhost
 
 In your React code:
 
-```js
+```blockchain.js
 import abi from '../artifacts/contracts/YourContract.sol/YourContract.json';
 const contractAddress = "0x..."; // replace with deployed address
 ```
